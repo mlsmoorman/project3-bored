@@ -6,6 +6,7 @@ export default function GetRandomActivity() {
     const [loading, setLoading] = useState(true);
     const [randomActivity, setRandomActivity] = useState({})
     const [count, setCount] = useState(0)
+    const [userActivities, setUserActivities] = useState({});
 
     // async function getActivity() {
     //     const endPoint = `http://www.boredapi.com/api/activity/`
@@ -50,6 +51,7 @@ export default function GetRandomActivity() {
         }
         getActivity();
     }, [count]);
+
 
 
 

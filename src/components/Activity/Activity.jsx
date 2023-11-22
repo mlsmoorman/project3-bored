@@ -1,26 +1,49 @@
 import { Grid, Segment, Item, Progress, Button } from "semantic-ui-react"
 import { useState } from "react";
+import tokenService from "../../utils/tokenService";
 
 export default function Activity({randomActivity}) {
 
     console.log('Activity function running', randomActivity)
     const difficultyPercent = randomActivity.accessibility * 100
+    
     let priceFree = false;
-
     const pricePercent = randomActivity.price * 100
     if (pricePercent === 0) {priceFree = true}
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        const formData = new FormData();
-        
+    function handleClick(e) {
+        e.preventDefault(); 
+        console.log(e)
+        addActivity(randomActivity);
+       
+    }
+
+    // (C)RUD - creating the random activity within the database with the user who selected it
+    async function addActivity(activityData) {
+        console.log('***addActivity function started**', activityData)
+        try{
+            // HTTP request going to the server
+            const response = await fetch("/api/activities", {
+                method: "POST",
+                body: activityData,
+                headers: {
+                    Authorization: "Bearer " + tokenService.getToken(),
+                },
+            });
+            const data = await response.json();
+            // The HTTP cycle is complete and we're passing parsed response to server
+            console.log("This is the response from the server=====>", data)
+  
+        } catch (err) {
+            console.log(err);
+        }
     }
 
 
     return (
         <Segment>
             <Item.Group>
-                <Item onSubmit={handleSubmit}>
+                <Item onClick={handleClick}>
                     <Item.Content>
                         <Item.Header as='a'>And your activity is...</Item.Header>
                         <h2 style={{color:"purple"}}>{randomActivity.activity}</h2>
