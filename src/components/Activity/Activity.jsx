@@ -1,10 +1,10 @@
 import { Grid, Segment, Item, Progress, Button } from "semantic-ui-react"
 import { useState } from "react";
 import tokenService from "../../utils/tokenService";
+import UserActivities from "../UserActivities/UserActivities";
 
 export default function Activity({randomActivity}) {
-
-    console.log('Activity function running', randomActivity)
+    
     const difficultyPercent = randomActivity.accessibility * 100
     
     let priceFree = false;
@@ -13,30 +13,17 @@ export default function Activity({randomActivity}) {
 
     function handleClick(e) {
         e.preventDefault(); 
-        console.log(e)
         addActivity(randomActivity);
-       
     }
 
     // (C)RUD - creating the random activity within the database with the user who selected it
     async function addActivity(activityData) {
-        console.log('activityData ====>', activityData)
-        try{
-            // HTTP request going to the server
-            const response = await fetch("/api/activities", {
-                method: "POST",
-                headers: new Headers({'Content-Type': 'application/json'}),
-                body: JSON.stringify(activityData)
-            });
-            const data = await response.json();
-            // The HTTP cycle is complete and we're passing parsed response to server
-            console.log("This is the response from the server=====>", data)
-  
-        } catch (err) {
-            console.log(err);
-        }
+        return fetch("/api/activities", {
+            method: 'POST',
+            headers: new Headers({'Content-Type': 'application/json', Authorization: "Bearer " + tokenService.getToken()}),
+            body: JSON.stringify(activityData)
+        })
     }
-
 
     return (
         <Segment>
@@ -50,8 +37,8 @@ export default function Activity({randomActivity}) {
                         <h3>Difficulty</h3>
                         <Progress percent={difficultyPercent} />
                         <>
-                            {priceFree 
-                            ? <h1>This activity is free!!!</h1> 
+                            {priceFree
+                            ? <h3>This activity is free!!!</h3> 
                             : <h3>$$Cost$$
                                 <Progress percent={pricePercent} color="green"/>
                             </h3>}
@@ -60,6 +47,7 @@ export default function Activity({randomActivity}) {
                     </Item.Content>
                 </Item>
             </Item.Group>
+            <UserActivities />
         </Segment>
     )
 }

@@ -7,4 +7,6 @@ const upload = multer();
 
 router.post('/', activitiesCtrl.create);
 
+router.get('/', activitiesCtrl.index);
+
 module.exports = router;

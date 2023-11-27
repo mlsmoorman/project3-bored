@@ -2,6 +2,7 @@ const Activity = require("../models/activity");
 
 module.exports = {
     create,
+    index,
 }
 
 async function create(req, res) {
@@ -9,8 +10,7 @@ async function create(req, res) {
 
     try {
         const activityDoc = await Activity.create({
-            // user: req.user,
-            // photoUrl: req.user.photoUrl,
+            user: req.user,
             activity: req.body.activity,
             type: req.body.type,
             participants: req.body.participants,
@@ -23,4 +23,13 @@ async function create(req, res) {
         console.log(err);
     }
 
+}
+
+async function index(req, res) {
+    try {
+        const activities = await Activity.find({}).populate("user").exec();
+        res.status(200).json({ activities });
+    } catch(err) {
+        res.json({error: err})
+    }
 }
