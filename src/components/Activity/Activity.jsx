@@ -20,15 +20,13 @@ export default function Activity({randomActivity}) {
 
     // (C)RUD - creating the random activity within the database with the user who selected it
     async function addActivity(activityData) {
-        console.log('***addActivity function started**', activityData)
+        console.log('activityData ====>', activityData)
         try{
             // HTTP request going to the server
             const response = await fetch("/api/activities", {
                 method: "POST",
-                body: activityData,
-                headers: {
-                    Authorization: "Bearer " + tokenService.getToken(),
-                },
+                headers: new Headers({'Content-Type': 'application/json'}),
+                body: JSON.stringify(activityData)
             });
             const data = await response.json();
             // The HTTP cycle is complete and we're passing parsed response to server

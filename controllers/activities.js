@@ -5,12 +5,12 @@ module.exports = {
 }
 
 async function create(req, res) {
-    console.log("req.body==>", req.body, "req.user==>", req.user);
+    console.log("req.body==>", req.body, req.user);
 
     try {
         const activityDoc = await Activity.create({
-            user: req.user,
-            photoUrl: req.user.photoUrl,
+            // user: req.user,
+            // photoUrl: req.user.photoUrl,
             activity: req.body.activity,
             type: req.body.type,
             participants: req.body.participants,

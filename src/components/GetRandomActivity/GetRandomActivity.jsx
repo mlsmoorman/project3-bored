@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { Segment, Button, Grid, Form } from "semantic-ui-react";
 import Activity from "../Activity/Activity";
 
+
+
 export default function GetRandomActivity() {
     const [loading, setLoading] = useState(true);
     const [randomActivity, setRandomActivity] = useState({})
     const [count, setCount] = useState(0)
-    const [userActivities, setUserActivities] = useState({});
 
     // async function getActivity() {
     //     const endPoint = `http://www.boredapi.com/api/activity/`
@@ -51,9 +52,6 @@ export default function GetRandomActivity() {
         }
         getActivity();
     }, [count]);
-
-
-
 
     return (
         <Segment>

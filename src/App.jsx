@@ -6,7 +6,7 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage"
 import userService from "./utils/userService"
 
 import Layout from "./pages/Layout/Layout";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import HomePage from "./pages/HomePage/HomePage";
 import ActivitiesPage from "./pages/ActivitiesPage/ActivitesPage";
 
 export default function App() {
@@ -45,8 +45,7 @@ export default function App() {
         path="/"
         element={<Layout loggedUser={user} handleLogout={logout} />}
       >
-        {/* <Route index element={<ActivitiesPage loggedUser={user} />} /> */}
-
+        <Route index element={<HomePage loggedUser={user} />} />
         <Route 
           path="/random"
           element={<ActivitiesPage />}
