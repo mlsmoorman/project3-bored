@@ -42,6 +42,15 @@ export default function ActivitiesPage() {
 
     async function updateActivity(activityId) {
         // api call / fetch request goes here
+        console.log('ACTIVITY ID', activityId)
+        const response = await fetch(`api/${activityId}`, {
+            method: 'PUT',
+            headers: new Headers({'Content-Type': 'application/json', Authorization: "Bearer " + tokenService.getToken()}),
+            body: JSON.stringify(activities)
+        })
+        
+
+        console.log('updateActivity', response)
         // conditionally update state based on response
         setActivities(
             activities.map((activity) => {

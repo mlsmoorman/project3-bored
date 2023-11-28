@@ -16,8 +16,7 @@ export default function HomePage() {
         <h1>Welcome to BoredNoMore</h1>
         <h2>Are you bored and frustrated that you have run out of ideas on what to do next?</h2>  
         <h3>If your answer is yes, this is the app for you!</h3>
-        <h4>Just choose the link above to select a random activity or chose from 
-        one of the activity choices below for a more tailored activity based on your interests and you're 
+        <h4>Just choose the link above to select a random activity and you're 
         off to the races!!!  ENJOY!! </h4>
             <Card.Group itemsPerRow={3}>
                 <Card onClick={() => setType('charity')} image={'https://i.imgur.com/zJUPYuZ.jpg'}/>

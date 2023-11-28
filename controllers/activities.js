@@ -3,6 +3,7 @@ const Activity = require("../models/activity");
 module.exports = {
     create,
     index,
+    update
 }
 
 async function create(req, res) {
@@ -22,8 +23,23 @@ async function create(req, res) {
         res.status(200).json(activity)
     } catch(err) {
         console.log(err);
+        res.json({error: err})
     }
 
+}
+
+async function update(req, res) {
+    console.log("HITTING THE UPDATE ROUTE/FUNCTION...req.body===>", req.body)
+    try {
+        const updateActivity = await Activity.findOneAndUpdate({_id: req.params.id},
+            req.body,
+            {new: true}
+        );
+        res.status(200).json(updateActivity)
+    } catch(err) {
+        console.log(err);
+        res.json({error: err})
+    }
 }
 
 async function index(req, res) {
