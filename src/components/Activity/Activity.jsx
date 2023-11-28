@@ -1,10 +1,36 @@
-import { Grid, Segment, Item, Progress, Button } from "semantic-ui-react"
-import { useState } from "react";
-import tokenService from "../../utils/tokenService";
-import UserActivities from "../UserActivities/UserActivities";
+import { useEffect, useState } from "react";
+import { Segment, Button, Item, Progress } from "semantic-ui-react";
 
-export default function Activity({randomActivity}) {
+
+// This is the activities page
+// It will hold a random activity and a list of a users current activities
+
+export default function Activity({addActivity}) {
+    const [loading, setLoading] = useState(true);
+    const [randomActivity, setRandomActivity] = useState({})
+    const [count, setCount] = useState(0)
     
+    useEffect(() => {
+        const endPoint = `http://www.boredapi.com/api/activity/`
+
+        async function getActivity() {
+            try {
+                setLoading(true);
+                const response = await fetch(endPoint);
+                const body = await response.json();
+
+                setRandomActivity(body);
+                setLoading(false);
+
+            } catch (err) {
+                console.log(err);
+                setLoading(false);
+            }
+        }
+        getActivity();
+    }, [count]);
+
+
     const difficultyPercent = randomActivity.accessibility * 100
     
     let priceFree = false;
@@ -12,21 +38,16 @@ export default function Activity({randomActivity}) {
     if (pricePercent === 0) {priceFree = true}
 
     function handleClick(e) {
+        console.log('sanity check')
         e.preventDefault(); 
         addActivity(randomActivity);
     }
 
-    // (C)RUD - creating the random activity within the database with the user who selected it
-    async function addActivity(activityData) {
-        return fetch("/api/activities", {
-            method: 'POST',
-            headers: new Headers({'Content-Type': 'application/json', Authorization: "Bearer " + tokenService.getToken()}),
-            body: JSON.stringify(activityData)
-        })
-    }
-
     return (
         <Segment>
+            <Button onClick={() => setCount(count + 1)}>
+                Get Random Activity
+            </Button>
             <Item.Group>
                 <Item onClick={handleClick}>
                     <Item.Content>
@@ -47,7 +68,6 @@ export default function Activity({randomActivity}) {
                     </Item.Content>
                 </Item>
             </Item.Group>
-            <UserActivities />
         </Segment>
     )
 }

@@ -8,6 +8,7 @@ import userService from "./utils/userService"
 import Layout from "./pages/Layout/Layout";
 import HomePage from "./pages/HomePage/HomePage";
 import ActivitiesPage from "./pages/ActivitiesPage/ActivitesPage";
+import BlogPage from "./pages/BlogPage/BlogPage";
 
 export default function App() {
   
@@ -57,6 +58,10 @@ export default function App() {
         <Route
           path="/signup"
           element={<SignUpPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        />
+        <Route
+          path="/blog"
+          element={<BlogPage />}
         />
       </Route>
     </Routes>

@@ -7,7 +7,10 @@ const activitySchema = new mongoose.Schema({
     participants: String,
     difficulty: Number,
     price: Number,
-    completed: Boolean,
+    completed: {
+        type : Boolean,
+        default: false
+    },
     blog: String,
     rating: Number
 })

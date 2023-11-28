@@ -6,7 +6,7 @@ module.exports = {
 }
 
 async function create(req, res) {
-    console.log("req.body==>", req.body, req.user);
+    console.log("req.body==>", req.body, "req.user==>", req.user);
 
     try {
         const activityDoc = await Activity.create({
@@ -17,8 +17,9 @@ async function create(req, res) {
             difficulty: req.body.difficulty,
             price: req.body.price,
         })
-        await activityDoc.populate('user');
-   
+        const activity = await activityDoc.populate('user');
+        
+        res.status(200).json(activity)
     } catch(err) {
         console.log(err);
     }

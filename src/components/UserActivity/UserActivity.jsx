@@ -1,13 +1,23 @@
-import { Table } from "semantic-ui-react"
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { Table, Icon} from "semantic-ui-react"
 
-export default function UserActivity({activity}) {
-    console.log("Activity", activity)
+export default function UserActivity({updateActivity, activity}) {
+
+    function handleClick() {
+        updateActivity(activity._id);
+    }
+
+    
     return (
         <>
             <Table.Row>
                 <Table.Cell>{activity.activity}</Table.Cell>
-                <Table.Cell>Completed 1</Table.Cell>
-                <Table.Cell>AddView 1</Table.Cell>
+                {activity.completed 
+                ? <Table.Cell><Icon name="check"></Icon></Table.Cell>
+                : <Table.Cell><button onClick={handleClick}>Complete?</button></Table.Cell>
+                }
+                <Table.Cell><Link to="/blog">Let's Discuss!</Link></Table.Cell>
             </Table.Row>
         </>
     )

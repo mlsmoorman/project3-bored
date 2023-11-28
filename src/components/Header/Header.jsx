@@ -27,6 +27,11 @@ export default function PageHeader({ handleLogout }) {
                     ></Image>
                 </Link>
             </Header>
+            <Header as="h2" textAlign="center">
+                <Link to={`/random`}>
+                        Choose a Random Activity Now!
+                </Link>
+            </Header>
         </Segment>
     )
 }

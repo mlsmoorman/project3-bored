@@ -3,31 +3,12 @@ import tokenService from "../../utils/tokenService";
 import { useEffect, useState } from "react";
 import UserActivity from "../UserActivity/UserActivity";
 
-export default function UserActivities() {
-    const [activities, setActivities] = useState([]);
 
-    useEffect(() => {
-       getActivities();
-    }, [setActivities])
+export default function UserActivities({updateActivity, activities}) {
+    
 
-    async function getActivities() {
-        try {
-            const response = await fetch ("api/activities", {
-                method: "GET",
-                headers: {
-                    Authorization: "Bearer " + tokenService.getToken(),
-                },
-            })
-            const data = await response.json();
-            console.log("data", data);
-            setActivities(data.activities);
-        } catch(err) {
-            console.log(err);
-        }
-    }
-
-    const displayActivities = activities.map((activity) => {
-        return <UserActivity activity={activity} />
+    const displayActivities = activities.map((activity, idx) => {
+        return <UserActivity updateActivity={updateActivity} activity={activity} key={idx} />
     })
 
     return (
