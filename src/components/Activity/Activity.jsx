@@ -1,73 +1,63 @@
-import { useEffect, useState } from "react";
-import { Segment, Button, Item, Progress } from "semantic-ui-react";
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { Table, Icon, Button, Image } from "semantic-ui-react"
+import { useLoggedUser } from "../../contexts/UserContext";
 
+export default function UserActivity({testingKey, updateActivity, activity, userPage}) {
+    const loggedUser = useLoggedUser();
 
-// This is the activities page
-// It will hold a random activity and a list of a users current activities
+    console.log(activity)
 
-export default function Activity({addActivity}) {
-    const [loading, setLoading] = useState(true);
-    const [randomActivity, setRandomActivity] = useState({})
-    const [count, setCount] = useState(0)
-    
-    useEffect(() => {
-        const endPoint = `http://www.boredapi.com/api/activity/`
-
-        async function getActivity() {
-            try {
-                setLoading(true);
-                const response = await fetch(endPoint);
-                const body = await response.json();
-
-                setRandomActivity(body);
-                setLoading(false);
-
-            } catch (err) {
-                console.log(err);
-                setLoading(false);
-            }
-        }
-        getActivity();
-    }, [count]);
-
-
-    const difficultyPercent = randomActivity.accessibility * 100
-    
-    let priceFree = false;
-    const pricePercent = randomActivity.price * 100
-    if (pricePercent === 0) {priceFree = true}
-
-    function handleClick(e) {
-        console.log('sanity check')
-        e.preventDefault(); 
-        addActivity(randomActivity);
+    function handleClick() {
+        updateActivity(activity._id);
     }
 
-    return (
-        <Segment>
-            <Button onClick={() => setCount(count + 1)}>
-                Get Random Activity
-            </Button>
-            <Item.Group>
-                <Item onClick={handleClick}>
-                    <Item.Content>
-                        <Item.Header as='a'>And your activity is...</Item.Header>
-                        <h2 style={{color:"purple"}}>{randomActivity.activity}</h2>
-                        <h3>Type of Activity: {randomActivity.type}</h3>
-                        <h3>Number of participants: {randomActivity.participants}</h3>
-                        <h3>Difficulty</h3>
-                        <Progress percent={difficultyPercent} />
-                        <>
-                            {priceFree
-                            ? <h3>This activity is free!!!</h3> 
-                            : <h3>$$Cost$$
-                                <Progress percent={pricePercent} color="green"/>
-                            </h3>}
-                        </>
-                        <Button color="blue" type="submit">Accept Activity</Button>
-                    </Item.Content>
-                </Item>
-            </Item.Group>
-        </Segment>
-    )
+    function handleBlog() {
+       console.log('activity key', activity.key)
+    }
+
+    // This return only displays the user's activities if on the user's page
+    if (userPage) {
+        if (loggedUser._id === activity.user._id) {
+            return (
+                <>
+                    <Table.Row>
+                        <Table.Cell>
+                            <Image 
+                                src={activity.user.photoUrl}
+                                avatar
+                            />
+                        </Table.Cell>
+                        <Table.Cell>{activity.activity}</Table.Cell>
+                        {activity.completed 
+                        ? <Table.Cell><Icon name="check"></Icon></Table.Cell>
+                        : <Table.Cell><Button onClick={handleClick}>Complete?</Button></Table.Cell>
+                        }
+                        <Table.Cell><Button onClick={handleBlog}>PLACEHOLDER</Button></Table.Cell>
+       
+                    </Table.Row>
+                </>
+            )
+        }
+    } else {
+        return (
+            <>
+                <Table.Row>
+                    <Table.Cell>
+                        <Image 
+                            src={activity.user.photoUrl}
+                            avatar
+                        />
+                    </Table.Cell>
+                    <Table.Cell>{activity.activity}</Table.Cell>
+                    {/* {activity.completed 
+                    ? <Table.Cell><Icon name="check"></Icon></Table.Cell>
+                    : <Table.Cell><Button onClick={handleClick}>Complete?</Button></Table.Cell>
+                    }
+                    <Table.Cell><Button onClick={handleBlog}>PLACEHOLDER</Button></Table.Cell> */}
+
+                </Table.Row>
+            </>
+        )
+    }
 }

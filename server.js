@@ -12,6 +12,7 @@ require("./config/database");
 const app = express();
 
 const activitiesRouter = require('./routes/api/activities');
+const blogsRouter = require('./routes/api/blogs');
 
 // add in when the app is ready to be deployed
 // app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
@@ -25,7 +26,9 @@ app.use(express.json());
 app.use(require("./config/auth"));
 // api routes must be before the "catch all" route
 app.use("/api/users", require("./routes/api/users"));
+
 app.use('/api/activities', activitiesRouter);
+app.use('/api', blogsRouter);
 
 // "catch all" route
 app.get('/*', function(req, res) {

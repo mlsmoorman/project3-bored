@@ -8,7 +8,7 @@ import userService from "./utils/userService"
 import Layout from "./pages/Layout/Layout";
 import HomePage from "./pages/HomePage/HomePage";
 import ActivitiesPage from "./pages/ActivitiesPage/ActivitesPage";
-import BlogPage from "./pages/BlogPage/BlogPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 export default function App() {
   
@@ -48,8 +48,12 @@ export default function App() {
       >
         <Route index element={<HomePage loggedUser={user} />} />
         <Route 
-          path="/random"
+          path="/activities"
           element={<ActivitiesPage />}
+        />
+        <Route 
+          path="/:username"
+          element={<ProfilePage />}
         />
         <Route
           path="/login"
@@ -58,10 +62,6 @@ export default function App() {
         <Route
           path="/signup"
           element={<SignUpPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-        />
-        <Route
-          path="/blog"
-          element={<BlogPage />}
         />
       </Route>
     </Routes>

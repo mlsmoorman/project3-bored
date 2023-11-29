@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 
+const blogsSchema = mongoose.Schema({
+    username: String,
+    userId: { type: mongoose.Schema.Types.ObjectId },
+    post: String,
+    photoUrl: String
+})
+
 const activitySchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     activity: String,
+    key: Number,
     type: String,
     participants: String,
     difficulty: Number,
@@ -11,7 +19,7 @@ const activitySchema = new mongoose.Schema({
         type : Boolean,
         default: false
     },
-    blog: String,
+    blogs: [blogsSchema],
     rating: Number
 })
 

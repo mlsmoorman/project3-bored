@@ -13,6 +13,7 @@ async function create(req, res) {
         const activityDoc = await Activity.create({
             user: req.user,
             activity: req.body.activity,
+            key: req.body.key,
             type: req.body.type,
             participants: req.body.participants,
             difficulty: req.body.difficulty,
