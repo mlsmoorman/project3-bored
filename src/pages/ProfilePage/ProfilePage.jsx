@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Segment } from "semantic-ui-react";
 import { useLoggedUser } from "../../contexts/UserContext"
-import ActivitiesFeed from "../../components/ActivitiesFeed/ActivitiesFeed"
+import ActivityFeed from "../../components/ActivityFeed/ActivityFeed"
 import tokenService from "../../utils/tokenService";
 
 
@@ -54,7 +54,7 @@ export default function ProfilePage() {
         <Segment>
             <h2>Welcome, {loggedUser.username}!</h2>
             <h3>Below are your...</h3>  
-            <ActivitiesFeed updateActivity={updateActivity} activities={activities} userPage={true} />
+            <ActivityFeed updateActivity={updateActivity} activities={activities} userPage={true} />
         </Segment>
     )
 }

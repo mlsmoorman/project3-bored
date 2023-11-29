@@ -7,7 +7,7 @@ import userService from "./utils/userService"
 
 import Layout from "./pages/Layout/Layout";
 import HomePage from "./pages/HomePage/HomePage";
-import ActivitiesPage from "./pages/ActivitiesPage/ActivitesPage";
+import ActivityPage from "./pages/ActivityPage/ActivityPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 export default function App() {
@@ -48,8 +48,8 @@ export default function App() {
       >
         <Route index element={<HomePage loggedUser={user} />} />
         <Route 
-          path="/activities"
-          element={<ActivitiesPage />}
+          path="/activity"
+          element={<ActivityPage />}
         />
         <Route 
           path="/:username"

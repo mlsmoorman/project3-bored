@@ -2,7 +2,7 @@ import { Segment, Card } from "semantic-ui-react"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import GetRandomActivity from "../../components/RandomActivityCard/RandomActivityCard";
-import ActivitiesPage from "../ActivitiesPage/ActivitesPage";
+import ActivitiesPage from "../ActivityPage/ActivityPage";
 
 export default function HomePage() {
     const [type, setType] = useState('');
@@ -19,7 +19,7 @@ export default function HomePage() {
         <h4>Just choose the link above to select a random activity and you're 
         off to the races!!!  ENJOY!! </h4>
         <h1>
-            <Link to={`/activities`}>
+            <Link to={`/activity`}>
                 Click here to choose a random activity now!
             </Link>
         </h1>

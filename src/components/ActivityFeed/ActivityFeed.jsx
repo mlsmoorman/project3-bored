@@ -1,9 +1,15 @@
 import { Segment, Grid, Table } from "semantic-ui-react"
 import Activity from "../Activity/Activity";
 
-export default function UserActivities({updateActivity, activities, userPage, removeLike, addLike}) {
+export default function ActivityFeed({updateActivity, activities, userPage, removeLike, addLike}) {
+    console.log(activities)
+    const validActivities = activities.filter((act) => {
+        if (act.user && act.user._id) return true
+        return false
+    })
+    console.log('validActivities=========>', validActivities)
 
-    const displayActivities = activities.map((activity, idx) => {
+    const displayActivities = validActivities.map((activity, idx) => {
         return <Activity 
             updateActivity={updateActivity} 
             activity={activity} 

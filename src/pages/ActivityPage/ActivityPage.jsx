@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { Segment, Table, Grid, Form, Button } from "semantic-ui-react";
 import RandomActivityCard from "../../components/RandomActivityCard/RandomActivityCard";
-import ActivitiesFeed from "../../components/ActivitiesFeed/ActivitiesFeed";
+import ActivityFeed from "../../components/ActivityFeed/ActivityFeed";
 import tokenService from "../../utils/tokenService";
-import activitiesService from "../../utils/activitiesService";
+
 
 import AddBlogForm from "../../components/AddBlogForm/AddBlogForm";
 
-export default function ActivitiesPage() {
+export default function ActivityPage() {
     const [activities, setActivities] = useState([]);
 
     useEffect(() => {
@@ -98,7 +98,7 @@ export default function ActivitiesPage() {
             })
             const data = await response.json();
             getActivities();
-            console.log('this is data from removeLike ==>', data)
+            console.log('data from removeLike ==>', data)
         } catch(err) {
             console.log(err);
         }
@@ -117,7 +117,7 @@ export default function ActivitiesPage() {
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <ActivitiesFeed 
+                    <ActivityFeed 
                         updateActivity={updateActivity} 
                         activities={activities} 
                         removeLike={removeLike}

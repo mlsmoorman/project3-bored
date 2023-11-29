@@ -3,10 +3,13 @@ import { Link } from "react-router-dom"
 import { Table, Icon, Button, Image } from "semantic-ui-react"
 import { useLoggedUser } from "../../contexts/UserContext";
 
-export default function UserActivity({updateActivity, activity, userPage, removeLike, addLike}) {
+export default function Activity({updateActivity, activity, userPage, removeLike, addLike}) {
     const loggedUser = useLoggedUser();
 
-    // console.log(activity)
+    const userId = activity.user._id
+
+    console.log('logged user ==>', loggedUser)
+    console.log(activity)
 
     function handleClick() {
         console.log('COMPLETE STATUS UPDATE CLICKED')
@@ -31,7 +34,7 @@ export default function UserActivity({updateActivity, activity, userPage, remove
 
     // This return only displays the user's activities if on the user's page
     if (userPage) {
-        if (loggedUser._id === activity.user._id) {
+        if (loggedUser._id === userId) {
             return (
                 <>
                     <Table.Row>
@@ -53,6 +56,7 @@ export default function UserActivity({updateActivity, activity, userPage, remove
                                 color={likeColor}
                                 onClick={clickHandler}
                             ></Icon>
+                            {activity.likes.length} Likes
                         </Table.Cell>
                     </Table.Row>
                 </>
@@ -80,6 +84,7 @@ export default function UserActivity({updateActivity, activity, userPage, remove
                             color={likeColor}
                             onClick={clickHandler}
                         ></Icon>
+                        {activity.likes.length} Likes
                     </Table.Cell>
                 </Table.Row>
             </>

@@ -52,24 +52,8 @@ async function update(activityId) {
     }
 }
 
-
-// ***************** DELETE THIS *****************
-async function learning() {
-    return fetch("api/acitivities", {
-        method: "GET",
-        headers: {
-            Authorization: "Bearer " + tokenService.getToken(),
-        },
-    })
-    .then(responseFromTheServer => {
-        return responseFromTheServer.json()
-    })
-    
-}
-
 export default {
     index,
     create,
-    update,
-    learning
+    update
 }

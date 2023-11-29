@@ -32,8 +32,9 @@ async function create(req, res) {
 async function update(req, res) {
     console.log("HITTING THE UPDATE ROUTE/FUNCTION...req.body===>", req.body)
     try {
-        const updateActivity = await Activity.findOneAndUpdate({_id: req.params.id},
-            req.body,
+        const updateActivity = await Activity.findOneAndUpdate(
+            {_id: req.params.id},
+            {completed: true},
             {new: true}
         );
         res.status(200).json(updateActivity)
