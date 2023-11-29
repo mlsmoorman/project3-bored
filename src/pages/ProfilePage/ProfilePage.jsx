@@ -4,6 +4,7 @@ import { useLoggedUser } from "../../contexts/UserContext"
 import ActivitiesFeed from "../../components/ActivitiesFeed/ActivitiesFeed"
 import tokenService from "../../utils/tokenService";
 
+
 export default function ProfilePage() {
     const loggedUser = useLoggedUser();
     const [activities, setActivities] = useState([]);
@@ -28,11 +29,32 @@ export default function ProfilePage() {
         }
     }
 
+    async function updateActivity(activityId) {
+        // api call / fetch request goes here
+        console.log('ACTIVITY ID', activityId)
+        
+        const response = await fetch(`api/activities/${activityId}`, {
+            method: 'PUT',
+            headers: new Headers({'Content-Type': 'application/json', Authorization: "Bearer " + tokenService.getToken()}),
+            body: JSON.stringify(activities)
+        })
+        
+        console.log('updateActivity', response)
+        // conditionally update state based on response
+        setActivities(
+            activities.map((activity) => {
+                return activity._id === activityId
+                ? {...activity, completed:true}
+                : activity
+            })
+        )
+    }
+
     return (
         <Segment>
             <h2>Welcome, {loggedUser.username}!</h2>
             <h3>Below are your...</h3>  
-            <ActivitiesFeed activities={activities} userPage={true}/>
+            <ActivitiesFeed updateActivity={updateActivity} activities={activities} userPage={true} />
         </Segment>
     )
 }

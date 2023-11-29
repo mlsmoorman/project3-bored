@@ -72,9 +72,41 @@ export default function ActivitiesPage() {
         )
     }
 
-    function testingKey(activityKey) {
-        console.log('testingkey, activity key ===>', activityKey)
+    async function addLike(activityId) {
+        try {
+            const response = await fetch (`/api/activities/${activityId}/likes`, {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + tokenService.getToken()
+                },
+            });
+            const data = await response.json();
+            console.log('data from add like===>', data)
+            getActivities();
+        } catch(err) {
+            console.log(err)
+        }
     }
+
+    async function removeLike(likeId) {
+        try {
+            const response = await fetch(`/api/likes/${likeId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + tokenService.getToken(),
+                },
+            })
+            const data = await response.json();
+            getActivities();
+            console.log('this is data from removeLike ==>', data)
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    // function testingKey(activityKey) {
+    //     console.log('testingkey, activity key ===>', activityKey)
+    // }
 
     return (
         <Grid centered >
@@ -85,12 +117,17 @@ export default function ActivitiesPage() {
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <ActivitiesFeed updateActivity={updateActivity} activities={activities} />
+                    <ActivitiesFeed 
+                        updateActivity={updateActivity} 
+                        activities={activities} 
+                        removeLike={removeLike}
+                        addLike={addLike}
+                    />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <AddBlogForm testingKey={testingKey} activities={activities}/>
+                    <AddBlogForm activities={activities}/>
                 </Grid.Column>
             </Grid.Row>
         </Grid>

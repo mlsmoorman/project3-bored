@@ -3,14 +3,27 @@ import { Link } from "react-router-dom"
 import { Table, Icon, Button, Image } from "semantic-ui-react"
 import { useLoggedUser } from "../../contexts/UserContext";
 
-export default function UserActivity({testingKey, updateActivity, activity, userPage}) {
+export default function UserActivity({updateActivity, activity, userPage, removeLike, addLike}) {
     const loggedUser = useLoggedUser();
 
-    console.log(activity)
+    // console.log(activity)
 
     function handleClick() {
+        console.log('COMPLETE STATUS UPDATE CLICKED')
         updateActivity(activity._id);
     }
+
+    const likedIndex = activity.likes.findIndex(
+        (like) => like.userId === loggedUser._id
+    );
+
+    const likeColor = likedIndex > -1 ? "red" : "grey"
+
+    const clickHandler = 
+        likedIndex > -1
+            ? () => removeLike(activity.likes[likedIndex]._id)
+            : () => addLike(activity._id)
+
 
     function handleBlog() {
        console.log('activity key', activity.key)
@@ -33,8 +46,14 @@ export default function UserActivity({testingKey, updateActivity, activity, user
                         ? <Table.Cell><Icon name="check"></Icon></Table.Cell>
                         : <Table.Cell><Button onClick={handleClick}>Complete?</Button></Table.Cell>
                         }
-                        <Table.Cell><Button onClick={handleBlog}>PLACEHOLDER</Button></Table.Cell>
-       
+                        <Table.Cell>                        
+                            <Icon
+                                name={'heart'}
+                                size={'large'}
+                                color={likeColor}
+                                onClick={clickHandler}
+                            ></Icon>
+                        </Table.Cell>
                     </Table.Row>
                 </>
             )
@@ -53,9 +72,15 @@ export default function UserActivity({testingKey, updateActivity, activity, user
                     {/* {activity.completed 
                     ? <Table.Cell><Icon name="check"></Icon></Table.Cell>
                     : <Table.Cell><Button onClick={handleClick}>Complete?</Button></Table.Cell>
-                    }
-                    <Table.Cell><Button onClick={handleBlog}>PLACEHOLDER</Button></Table.Cell> */}
-
+                    } */}
+                    <Table.Cell>
+                        <Icon
+                            name={'heart'}
+                            size={'large'}
+                            color={likeColor}
+                            onClick={clickHandler}
+                        ></Icon>
+                    </Table.Cell>
                 </Table.Row>
             </>
         )

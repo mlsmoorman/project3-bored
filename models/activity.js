@@ -7,6 +7,11 @@ const blogsSchema = mongoose.Schema({
     photoUrl: String
 })
 
+const likesSchema = mongoose.Schema({
+    username: String,
+    userId: { type: mongoose.Schema.Types.ObjectId },
+});
+
 const activitySchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     activity: String,
@@ -19,6 +24,7 @@ const activitySchema = new mongoose.Schema({
         type : Boolean,
         default: false
     },
+    likes: [likesSchema],
     blogs: [blogsSchema],
     rating: Number
 })

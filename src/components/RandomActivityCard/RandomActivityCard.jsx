@@ -29,7 +29,7 @@ export default function Activity({addActivity}) {
         getActivity();
     }, [count]);
 
-    console.log('random activity ----> ', randomActivity)
+    // console.log('random activity ----> ', randomActivity)
 
     const difficultyPercent = randomActivity.accessibility * 100
     
