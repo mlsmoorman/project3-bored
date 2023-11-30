@@ -1,26 +1,22 @@
 import { useEffect, useState } from "react";
 import { Button, Item, Progress, Card } from "semantic-ui-react";
 
-// This is the activities page
-// It will hold a random activity and a list of a users current activities
-
-export default function Activity({addActivity}) {
+// ========== Function RandomActivityCard completes the API call to get anti-boredom activities ===========
+export default function RandomActivityCard({addActivity}) {
     const [loading, setLoading] = useState(true);
     const [randomActivity, setRandomActivity] = useState({})
     const [count, setCount] = useState(0)
     
+    // API call to the Boredom API
     useEffect(() => {
         const endPoint = `http://www.boredapi.com/api/activity/`
-
         async function getActivity() {
             try {
                 setLoading(true);
                 const response = await fetch(endPoint);
                 const body = await response.json();
-
                 setRandomActivity(body);
                 setLoading(false);
-
             } catch (err) {
                 console.log(err);
                 setLoading(false);
@@ -29,10 +25,10 @@ export default function Activity({addActivity}) {
         getActivity();
     }, [count]);
 
-    // console.log('random activity ----> ', randomActivity)
-
+    // updates API difficulty to an actual percent
     const difficultyPercent = randomActivity.accessibility * 100
     
+    // updates API price to an actual percent and checks for free activities
     let priceFree = false;
     const pricePercent = randomActivity.price * 100
     if (pricePercent === 0) {priceFree = true}
@@ -42,6 +38,7 @@ export default function Activity({addActivity}) {
         addActivity(randomActivity);
     }
 
+    // renders each activity on the page for the user to review and choose to select or get another
     return (
         <Card>
             <Button color="blue" onClick={() => setCount(count + 1)}>

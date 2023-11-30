@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ActivityPage from "./pages/ActivityPage/ActivityPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
+
 export default function App() {
   
   const [user, setUser] = useState(userService.getUser());

@@ -1,52 +1,45 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
 import { Table, Icon, Button, Image } from "semantic-ui-react"
 import { useLoggedUser } from "../../contexts/UserContext";
 
-export default function Activity({updateActivity, activity, userPage, removeLike, addLike}) {
+// ========== This function takes a single activity and renders it on the form ==========
+export default function Activity({ updateActivity, activity, userPage, removeLike, addLike }) {
     const loggedUser = useLoggedUser();
-
     const userId = activity.user._id
 
-    console.log('logged user ==>', loggedUser)
-    console.log(activity)
-
+    // HandleClick updates the activity to show a user completed the activity
     function handleClick() {
-        console.log('COMPLETE STATUS UPDATE CLICKED')
         updateActivity(activity._id);
     }
 
+    // =========== LIKES FUNCTIONALITY ==========
+    // This assigns the index of the clicked on activity to a variable - likedIndex
     const likedIndex = activity.likes.findIndex(
         (like) => like.userId === loggedUser._id
     );
-
+    
+    // This assigns a color - red if user has liked an activity or grey if they haven't
     const likeColor = likedIndex > -1 ? "red" : "grey"
 
+    // When the heart icon is clicked on, calls remove/addLike depending on state
     const clickHandler = 
         likedIndex > -1
             ? () => removeLike(activity.likes[likedIndex]._id)
             : () => addLike(activity._id)
 
 
-    function handleBlog() {
-       console.log('activity key', activity.key)
-    }
-
-    // This return only displays the user's activities if on the user's page
+    // This return only displays the user's activities if the request is coming from the ProfilePage
     if (userPage) {
         if (loggedUser._id === userId) {
             return (
                 <>
                     <Table.Row>
-                        <Table.Cell>
-                            <Image 
-                                src={activity.user.photoUrl}
-                                avatar
-                            />
-                        </Table.Cell>
+
                         <Table.Cell>{activity.activity}</Table.Cell>
+                    {/* Checks if activity is complete - yes: checkmark // no: button to update once complete */}
                         {activity.completed 
-                        ? <Table.Cell><Icon name="check"></Icon></Table.Cell>
+                        ? <Table.Cell>
+                            <Icon name="check"></Icon>
+                          </Table.Cell>
                         : <Table.Cell><Button onClick={handleClick}>Complete?</Button></Table.Cell>
                         }
                         <Table.Cell>                        
@@ -63,6 +56,7 @@ export default function Activity({updateActivity, activity, userPage, removeLike
             )
         }
     } else {
+    // Requests from any other page return the following display
         return (
             <>
                 <Table.Row>
@@ -73,10 +67,6 @@ export default function Activity({updateActivity, activity, userPage, removeLike
                         />
                     </Table.Cell>
                     <Table.Cell>{activity.activity}</Table.Cell>
-                    {/* {activity.completed 
-                    ? <Table.Cell><Icon name="check"></Icon></Table.Cell>
-                    : <Table.Cell><Button onClick={handleClick}>Complete?</Button></Table.Cell>
-                    } */}
                     <Table.Cell>
                         <Icon
                             name={'heart'}

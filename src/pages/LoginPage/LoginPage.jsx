@@ -43,7 +43,6 @@ export default function LoginPage({handleSignUpOrLogin}) {
         <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
             <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as="h2" color="black" textAlign="center">
-{/* ==================== Icon is not working -- CHECK LATER ====================== */}
                     <Icon color='red' name='users' />Sign In
                 </Header>
                 <Form autoComplete="off" onSubmit={handleSubmit}>

@@ -7,8 +7,7 @@ module.exports = {
 }
 
 async function create(req, res) {
-    console.log("req.body==>", req.body, "req.user==>", req.user);
-
+    // ===== Function create - creates an activity within the database based on user selecting an activity =====
     try {
         const activityDoc = await Activity.create({
             user: req.user,
@@ -19,18 +18,17 @@ async function create(req, res) {
             difficulty: req.body.difficulty,
             price: req.body.price,
         })
-        const activity = await activityDoc.populate('user');
-        
+        const activity = await activityDoc.populate('user');    
         res.status(200).json(activity)
     } catch(err) {
         console.log(err);
         res.json({error: err})
     }
-
 }
 
 async function update(req, res) {
-    console.log("HITTING THE UPDATE ROUTE/FUNCTION...req.body===>", req.body)
+    // ===== Function update - when the user clicks complete, 
+    //       this updates complete in the activity model to true =====
     try {
         const updateActivity = await Activity.findOneAndUpdate(
             {_id: req.params.id},
@@ -45,10 +43,12 @@ async function update(req, res) {
 }
 
 async function index(req, res) {
+    // ===== Function index - populates the user for use during fetch calls =====
     try {
         const activities = await Activity.find({}).populate("user").exec();
         res.status(200).json({ activities });
     } catch(err) {
+        console.log(err)
         res.json({error: err})
     }
 }

@@ -1,12 +1,5 @@
 const mongoose = require("mongoose");
 
-const blogsSchema = mongoose.Schema({
-    username: String,
-    userId: { type: mongoose.Schema.Types.ObjectId },
-    post: String,
-    photoUrl: String
-})
-
 const likesSchema = mongoose.Schema({
     username: String,
     userId: { type: mongoose.Schema.Types.ObjectId },
@@ -25,8 +18,7 @@ const activitySchema = new mongoose.Schema({
         default: false
     },
     likes: [likesSchema],
-    blogs: [blogsSchema],
-    rating: Number
+    experience: String,
 })
 
 module.exports = mongoose.model("Activity", activitySchema);

@@ -1,4 +1,4 @@
-import { Segment, Card } from "semantic-ui-react"
+import { Segment, Card, Image, Container } from "semantic-ui-react"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import GetRandomActivity from "../../components/RandomActivityCard/RandomActivityCard";
@@ -7,22 +7,18 @@ import ActivitiesPage from "../ActivityPage/ActivityPage";
 export default function HomePage() {
     const [type, setType] = useState('');
 
-
-    console.log(type)
-
-
     return (
-    <Segment>
-        <h1>Welcome to BoredNoMore</h1>
+    <Container>
+        <Image src="https://i.imgur.com/94MZOzLl.png" centered size="large"/>
         <h2>Are you bored and frustrated that you have run out of ideas on what to do next?</h2>  
         <h3>If your answer is yes, this is the app for you!</h3>
-        <h4>Just choose the link above to select a random activity and you're 
-        off to the races!!!  ENJOY!! </h4>
-        <h1>
+        <h1>Click {}
             <Link to={`/activity`}>
-                Click here to choose a random activity now!
+                 here {}
             </Link>
+                 to choose a random activity now!
         </h1>
+
         <Card.Group itemsPerRow={3}>
             <Card onClick={() => setType('charity')} image={'https://i.imgur.com/zJUPYuZ.jpg'}/>
             <Card onClick={() => setType('busywork')} image={'https://i.imgur.com/nxHc7SV.png'}/>
@@ -34,6 +30,6 @@ export default function HomePage() {
             <Card onClick={() => setType('diy')} image={'https://i.imgur.com/2kOmJ5j.jpg'}/>
             <Card onClick={() => setType('recreational')} image={'https://i.imgur.com/OuUo5o7.jpg'}/>
         </Card.Group>
-    </Segment>  
+    </Container>  
     )
 }

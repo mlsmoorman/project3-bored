@@ -2,13 +2,13 @@ import { Header, Segment, Image, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useLoggedUser } from "../../contexts/UserContext";
 
+// ========== Creates the Header which renders on each page ===========
 export default function PageHeader({ handleLogout }) {
     const loggedUser = useLoggedUser();
     return (
         <Segment clearing>
             <Header as="h2" floated="right">
                 <Link to="/">
-{/* ==================== Icon is not working -- CHECK LATER ====================== */}
                     <Icon name="home"></Icon>
                 </Link>
                 <Link to="" onClick={handleLogout}>
@@ -25,6 +25,12 @@ export default function PageHeader({ handleLogout }) {
                         }
                         avatar
                     ></Image>
+                    Welcome {loggedUser.username}!
+                </Link>
+            </Header>
+            <Header as="h2" textAlign="centered">
+                <Link to="/activity">
+                    Activity Page
                 </Link>
             </Header>
         </Segment>

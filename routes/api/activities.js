@@ -6,9 +6,7 @@ const multer = require ('multer')
 const upload = multer();
 
 router.post('/', activitiesCtrl.create);
-
 router.get('/', activitiesCtrl.index);
-
 router.put('/:id', activitiesCtrl.update)
 
 module.exports = router;

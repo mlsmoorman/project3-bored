@@ -1,14 +1,15 @@
 import { Segment, Grid, Table } from "semantic-ui-react"
 import Activity from "../Activity/Activity";
 
-export default function ActivityFeed({updateActivity, activities, userPage, removeLike, addLike}) {
-    console.log(activities)
+// ========== Function ActivityFeed deconstructs activities and sends an activity to the activity component ==========
+export default function ActivityFeed({ updateActivity, activities, userPage, removeLike, addLike }) {
+    // safety check that user exists in database
     const validActivities = activities.filter((act) => {
         if (act.user && act.user._id) return true
         return false
     })
-    console.log('validActivities=========>', validActivities)
 
+    // map over activities to get one activity to pass to the Activity component
     const displayActivities = validActivities.map((activity, idx) => {
         return <Activity 
             updateActivity={updateActivity} 
@@ -20,6 +21,7 @@ export default function ActivityFeed({updateActivity, activities, userPage, remo
         />
     })
 
+    // changes display based on if it's coming from the ProfilePage
     if (userPage) {
         return (
             <Grid textAlign="center" >
@@ -27,7 +29,6 @@ export default function ActivityFeed({updateActivity, activities, userPage, remo
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>User</Table.HeaderCell>
                             <Table.HeaderCell>Activity</Table.HeaderCell>
                             <Table.HeaderCell>Completed?</Table.HeaderCell>
                             <Table.HeaderCell>Likes</Table.HeaderCell>
@@ -49,7 +50,6 @@ export default function ActivityFeed({updateActivity, activities, userPage, remo
                     <Table.Row>
                         <Table.HeaderCell>User</Table.HeaderCell>
                         <Table.HeaderCell>Activity</Table.HeaderCell>
-                        {/* <Table.HeaderCell>Completed?</Table.HeaderCell> */}
                         <Table.HeaderCell>Likes</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>

@@ -6,26 +6,25 @@ module.exports = {
 }
 
 async function create(req, res) {
-    console.log(req.params.id)
+    // ===== Function create adds a like to the activity the user clicked on =====
     try {
+        // this is looking in the activity model to find the matching ID, adding a like, and saving the update
         const likeDoc = await Activity.findById(req.params.id)
-        // console.log('activity', activity)
         likeDoc.likes.push({username: req.user.username, userId: req.user._id})
-        // console.log('post-push activity===>', activity)
         await likeDoc.save()
         res.status(201).json({data: 'like added'})
     } catch(err) {
+        console.log(err)
         res.status(400).json({err})
     }
 }
 
 async function deleteLike(req, res) {
-    console.log('DELETE ROUTE IS BEING HIT')
+    // ===== Function deleteLike allows the logged user to remove a previously liked activity =====
     try{
+        // this is looking in the activity model to find the matching ID, removing it and saving the update
         const likeDoc = await Activity.findOne({'likes._id': req.params.id, 'likes.username': req.user.username});
-        console.log('this is the activityDoc from DELETE =====>', likeDoc)
         likeDoc.likes.remove(req.params.id)
-        
         await likeDoc.save()
         res.json({data: 'like removed'})
     } catch(err) {

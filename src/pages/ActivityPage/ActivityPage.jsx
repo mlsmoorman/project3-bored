@@ -5,23 +5,15 @@ import ActivityFeed from "../../components/ActivityFeed/ActivityFeed";
 import tokenService from "../../utils/tokenService";
 
 
-import AddBlogForm from "../../components/AddBlogForm/AddBlogForm";
-
+// Activity Page allows users to choose an activity or browse other user selected activities
 export default function ActivityPage() {
     const [activities, setActivities] = useState([]);
 
     useEffect(() => {
-    //    console.log('ACTIVITIES SERVICE RETURN', activitiesService.index());
-    //    const tryme = [activitiesService.index()]
-    //    console.log('tryme', tryme[0])
-    // //    activitiesService.getActivities()
-    // //    .then ((data) => {
-    // //         setActivities({relatedTo: data})
-    // //    })
-    // //    console.log('activity in useEffect ======>', activities)
         getActivities();
     }, [])
-
+    
+    // ========== C(R)UD - obtains data from the server and updates state ==========
     async function getActivities() {
         try {
             const response = await fetch ("api/activities", {
@@ -31,38 +23,31 @@ export default function ActivityPage() {
                 },
             })
             const data = await response.json();
-            console.log("===========data===============", data);
             setActivities(data.activities);
         } catch(err) {
             console.log(err);
         }
     }
 
-    async function addActivity(activityData) {
-        
+    // ========== (C)RUD - adds the user selected activity to the database and updates state ==========
+    async function addActivity(activityData) {    
         const res = await fetch("/api/activities", {
             method: 'POST',
             headers: new Headers({'Content-Type': 'application/json', Authorization: "Bearer " + tokenService.getToken()}),
             body: JSON.stringify(activityData)
         })
-        console.log(res)
         const data = await res.json();
         setActivities([...activities, data])
-        console.log(data)
     }
 
+    // ========== CR(U)D - updates database to show user completed an activity ==========
     async function updateActivity(activityId) {
-        // api call / fetch request goes here
-        console.log('ACTIVITY ID', activityId)
-        
         const response = await fetch(`api/activities/${activityId}`, {
             method: 'PUT',
             headers: new Headers({'Content-Type': 'application/json', Authorization: "Bearer " + tokenService.getToken()}),
             body: JSON.stringify(activities)
         })
-        
-        console.log('updateActivity', response)
-        // conditionally update state based on response
+        // updates state if the activity clicked on matches the activity in the database
         setActivities(
             activities.map((activity) => {
                 return activity._id === activityId
@@ -72,6 +57,7 @@ export default function ActivityPage() {
         )
     }
 
+    // ========== (C)RUD - adds a like to the activity and updates state ==========
     async function addLike(activityId) {
         try {
             const response = await fetch (`/api/activities/${activityId}/likes`, {
@@ -81,13 +67,13 @@ export default function ActivityPage() {
                 },
             });
             const data = await response.json();
-            console.log('data from add like===>', data)
             getActivities();
         } catch(err) {
             console.log(err)
         }
     }
 
+    // ========== CRU(D) - removes a like for a specific activity ==========
     async function removeLike(likeId) {
         try {
             const response = await fetch(`/api/likes/${likeId}`, {
@@ -98,16 +84,12 @@ export default function ActivityPage() {
             })
             const data = await response.json();
             getActivities();
-            console.log('data from removeLike ==>', data)
         } catch(err) {
             console.log(err);
         }
     }
 
-    // function testingKey(activityKey) {
-    //     console.log('testingkey, activity key ===>', activityKey)
-    // }
-
+    // ========== Renders the Random Activity Card for selection and the selected activities to the page ==========
     return (
         <Grid centered >
             <Grid.Row>
@@ -125,14 +107,6 @@ export default function ActivityPage() {
                     />
                 </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
-                <Grid.Column>
-                    <AddBlogForm activities={activities}/>
-                </Grid.Column>
-            </Grid.Row>
         </Grid>
-        
     )
-        
-    
 }
