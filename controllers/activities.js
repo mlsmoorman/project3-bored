@@ -30,12 +30,12 @@ async function update(req, res) {
     // ===== Function update - when the user clicks complete, 
     //       this updates complete in the activity model to true =====
     try {
-        const updateActivity = await Activity.findOneAndUpdate(
+        const activityDoc = await Activity.findOneAndUpdate(
             {_id: req.params.id},
             {completed: true},
             {new: true}
         );
-        res.status(200).json(updateActivity)
+        res.status(200).json(activityDoc)
     } catch(err) {
         console.log(err);
         res.json({error: err})

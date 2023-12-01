@@ -3,7 +3,7 @@ import { Grid, Header, Form, Segment, Button, Icon } from "semantic-ui-react";
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import userService from '../../utils/userService';
 import { useNavigate } from "react-router-dom";
-
+import Loading from "../../components/Loading/Loading";
 
 export default function SignUpPage({handleSignUpOrLogin}) {
 
@@ -14,6 +14,8 @@ export default function SignUpPage({handleSignUpOrLogin}) {
         passwordConf: ''
     });
 
+    const [loading, setLoading] = useState(false)
+
     const [photo, setPhoto] = useState('');
     const [error, setError] = useState('');
     
@@ -21,7 +23,7 @@ export default function SignUpPage({handleSignUpOrLogin}) {
 
     async function handleSubmit(e){
         e.preventDefault();
-        
+        setLoading(true)
         // since there is a profile photo - need to convert the data into a FormData object
         const formData = new FormData();
         formData.append('photo', photo)
@@ -34,6 +36,7 @@ export default function SignUpPage({handleSignUpOrLogin}) {
         try {
             await userService.signup(formData);
             handleSignUpOrLogin();
+            setLoading(false)
             navigate('/')
         } catch(err) {
             console.log(err.message)
@@ -51,6 +54,14 @@ export default function SignUpPage({handleSignUpOrLogin}) {
     function handleFileInput(e) {
         console.log(e.target.files)
         setPhoto(e.target.files[0])
+    }
+
+    if (loading) {
+        return (
+            <header>
+                <Loading />
+            </header>
+        )
     }
 
     return (

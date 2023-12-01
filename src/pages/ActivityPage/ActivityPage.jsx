@@ -3,11 +3,12 @@ import { Segment, Table, Grid, Form, Button } from "semantic-ui-react";
 import RandomActivityCard from "../../components/RandomActivityCard/RandomActivityCard";
 import ActivityFeed from "../../components/ActivityFeed/ActivityFeed";
 import tokenService from "../../utils/tokenService";
+import Loading from "../../components/Loading/Loading";
 
-
-// Activity Page allows users to choose an activity or browse other user selected activities
+// Activity Page allows users to choose an activity or browse other user selected activities and like them
 export default function ActivityPage() {
     const [activities, setActivities] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getActivities();
@@ -15,6 +16,7 @@ export default function ActivityPage() {
     
     // ========== C(R)UD - obtains data from the server and updates state ==========
     async function getActivities() {
+        setLoading(true)
         try {
             const response = await fetch ("api/activities", {
                 method: "GET",
@@ -24,8 +26,10 @@ export default function ActivityPage() {
             })
             const data = await response.json();
             setActivities(data.activities);
+            setLoading(false)
         } catch(err) {
             console.log(err);
+            setLoading(false)
         }
     }
 
@@ -87,6 +91,14 @@ export default function ActivityPage() {
         } catch(err) {
             console.log(err);
         }
+    }
+
+    if (loading) {
+        return (
+            <header>
+                <Loading />
+            </header>
+        )
     }
 
     // ========== Renders the Random Activity Card for selection and the selected activities to the page ==========

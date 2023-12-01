@@ -1,40 +1,34 @@
+<img src="https://i.imgur.com/94MZOzLm.png">
 
-## Setup 
+Bored? No More is an app for those of us who have just run out of things to do and need a place to go to find some new ideas!  You can go through several random activities until you find one that suits your needs, then accept the activity.  Within the app, you can keep track which activities you've completed, as well as, see other user's activities to maybe get some ideas from there.
 
-1. Clone the repo
-2. Rename the folder to your Project, you can use the `mv` command like `mv Mern-Vite-Boilerplate yourprojectname`
-3. Delete the `.git` file, when you are in the root of the file, you can press `ls -a` and you should see a `.git` file, then go ahead and run `rm -rf .git`
+# Screenshot
+
+<img src="https://i.imgur.com/bzQYXWql.png">
+<img src="https://i.imgur.com/0a2s7sFl.png">
+<img src="https://i.imgur.com/zKcyLBll.png">
 
 
-#### Setup your git repo
+# Technologies Used
 
-1. go to github and create your github and create a repo (Without a readme or liscense you can add that later!)
-2.  Then follow the directions on github that says ```…or create a new repository on the command line```
+- MERN Stack
+    - MongoDB
+    - Express
+    - React
+    - Node
+- JavaScript
+- HTML
+- Semantic-UI-React
 
-it should look like this
+# Let's Check it Out!
 
-```
-git init
-git add .
-git commit -m "first commit"
-git remote add origin git@git.generalassemb.ly:SEI-CC/test.git // this will be whatever your address will be
-git push -u origin main
-```
+### [Bored? No More]()
+### [Trello](https://trello.com/b/SkgrdA7H/project-3)
 
-#### Setup the App
+# Future Enhancements
 
-```npm install```
-
-*DOTENV*
-
-`touch .env`
-
-add your variables
-
-```
-DATABASE_URL=mongodb://localhost:27017/testagramV2
-BUCKET_NAME=catcollectorone
-SECRET=mysecretforjwt
-```
-
-The app is configured, to use those respective key names for the database, jwt secret and aws bucket, of course you'll have your own values
+- Ability to look up a school and see all performances that belong to that school and their average scores / link to score details
+- If videos are available on YouTube - create links to the performance so those that may have missed it live, can still add scores and comments
+- Create a JAM section for the app that allows officials access to enter scores during competitions
+    - Give specific access to JAM Judges to enter official scores
+    - Give specific access to JAM Superior Judges to update / remove scores, if needed

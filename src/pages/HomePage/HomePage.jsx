@@ -1,12 +1,12 @@
-import { Segment, Card, Image, Container } from "semantic-ui-react"
-import { useState, useEffect } from "react"
+import { Card, Image, Container } from "semantic-ui-react"
+import { useState } from "react"
 import { Link } from "react-router-dom";
-import GetRandomActivity from "../../components/RandomActivityCard/RandomActivityCard";
-import ActivitiesPage from "../ActivityPage/ActivityPage";
 
+
+// This is the Home page
 export default function HomePage() {
     const [type, setType] = useState('');
-
+    
     return (
     <Container>
         <Image src="https://i.imgur.com/94MZOzLl.png" centered size="large"/>

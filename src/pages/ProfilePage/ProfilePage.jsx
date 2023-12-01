@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import { Segment, Image } from "semantic-ui-react";
 import { useLoggedUser } from "../../contexts/UserContext"
+
 import ActivityFeed from "../../components/ActivityFeed/ActivityFeed"
+import Loading from "../../components/Loading/Loading";
 import tokenService from "../../utils/tokenService";
 
-
+// ========== Function Profile Page renders the user's page to show their personal activities for updates ==========
 export default function ProfilePage() {
-    const loggedUser = useLoggedUser();
     const [activities, setActivities] = useState([]);
-
-    console.log('LOGGED USER', loggedUser.photoUrl)
-
+    const [loading, setLoading] = useState([false])
+    const loggedUser = useLoggedUser();
+    
     useEffect(() => {
         getActivities();
     }, [])
 
     // ========== C(R)UD - obtains data from the server and updates state ==========
     async function getActivities() {
+        setLoading(true)
         try {
             const response = await fetch ("api/activities", {
                 method: "GET",
@@ -26,8 +28,10 @@ export default function ProfilePage() {
             })
             const data = await response.json();
             setActivities(data.activities);
+            setLoading(false)
         } catch(err) {
             console.log(err);
+            setLoading(false)
         }
     }
 
@@ -79,6 +83,14 @@ export default function ProfilePage() {
         } catch(err) {
             console.log(err);
         }
+    }
+
+    if (loading) {
+        return (
+            <header>
+                <Loading />
+            </header>
+        )
     }
 
     // ========== Renders the Profile Page showing the user's selected activities to view and update ==========

@@ -38,7 +38,7 @@ export default function Activity({ updateActivity, activity, userPage, removeLik
                     {/* Checks if activity is complete - yes: checkmark // no: button to update once complete */}
                         {activity.completed 
                         ? <Table.Cell>
-                            <Icon name="check"></Icon>
+                            <Icon name="check" color="green"></Icon>
                           </Table.Cell>
                         : <Table.Cell><Button onClick={handleClick}>Complete?</Button></Table.Cell>
                         }

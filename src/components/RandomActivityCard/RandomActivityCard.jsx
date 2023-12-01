@@ -41,14 +41,14 @@ export default function RandomActivityCard({addActivity}) {
     // renders each activity on the page for the user to review and choose to select or get another
     return (
         <Card>
-            <Button color="blue" onClick={() => setCount(count + 1)}>
+            <Button color="red" onClick={() => setCount(count + 1)}>
                 Get Random Activity
             </Button>
             <Item.Group>
                 <Item onClick={handleClick}>
                     <Item.Content>
                         <Item.Header as='a'>And your activity is...</Item.Header>
-                        <h2 style={{color:"purple"}}>{randomActivity.activity}</h2>
+                        <h2 style={{color:"red"}}>{randomActivity.activity}</h2>
                         <h3>Type of Activity: {randomActivity.type}</h3>
                         <h3>Number of participants: {randomActivity.participants}</h3>
                         <h3>Difficulty</h3>
@@ -60,7 +60,7 @@ export default function RandomActivityCard({addActivity}) {
                                 <Progress percent={pricePercent} color="green"/>
                             </h3>}
                         </>
-                        <Button color="blue" type="submit">Accept Activity</Button>
+                        <Button color="red" type="submit">Accept Activity</Button>
                     </Item.Content>
                 </Item>
             </Item.Group>
