@@ -19,6 +19,7 @@ Bored? No More is an app for those of us who have just run out of things to do a
 - JavaScript
 - HTML
 - Semantic-UI-React
+- [Bored API](https://www.boredapi.com/documentation)
 
 # Let's Check it Out!
 
@@ -27,8 +28,22 @@ Bored? No More is an app for those of us who have just run out of things to do a
 
 # Future Enhancements
 
-- Ability to look up a school and see all performances that belong to that school and their average scores / link to score details
-- If videos are available on YouTube - create links to the performance so those that may have missed it live, can still add scores and comments
-- Create a JAM section for the app that allows officials access to enter scores during competitions
-    - Give specific access to JAM Judges to enter official scores
-    - Give specific access to JAM Superior Judges to update / remove scores, if needed
+- Ability to add user's experience to the activity once complete, including photos
+- Ability for all user's to see a blog page of user's experiences
+- Include a drop down for user to search more specific criteria
+    - Type
+        - Education
+        - Recreational
+        - Social
+        - DIY
+        - Charity
+        - Cooking
+        - Relaxation
+        - Music
+        - Busywork
+    - Number of participants
+    - Price
+    - Accessibility
+- Utilize HOME page to narrow search criteria based on selected photo
+    - Selected photo passes selection to the Bored API
+    - Bored API returns filtered results based on the activity type selected from HOME page
