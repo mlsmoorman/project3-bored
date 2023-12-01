@@ -37,13 +37,12 @@ export default function ProfilePage() {
 
     // ========== CR(U)D - updates database to show user completed an activity ==========
     async function updateActivity(activityId) {
-        // api call / fetch request goes here
         const response = await fetch(`api/activities/${activityId}`, {
             method: 'PUT',
             headers: new Headers({'Content-Type': 'application/json', Authorization: "Bearer " + tokenService.getToken()}),
             body: JSON.stringify(activities)
         })
-        // updates state if the activity clicked on matches the activity in the database
+        // updates state if the activity clicked on matches the activity in state
         setActivities(
             activities.map((activity) => {
                 return activity._id === activityId
@@ -96,8 +95,8 @@ export default function ProfilePage() {
     // ========== Renders the Profile Page showing the user's selected activities to view and update ==========
     return (
         <Segment>
+            <Image src="https://i.imgur.com/94MZOzLl.png" centered size="medium"/>  
             <h1>Welcome, {loggedUser.username}!</h1>
-            <Image src={loggedUser.photoUrl} avatar/>
             <h3>Below are your...</h3>  
             <ActivityFeed 
                 updateActivity={updateActivity} 

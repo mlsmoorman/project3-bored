@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Grid, Header, Icon, Form, Segment, Button, Message } from "semantic-ui-react";
+import { Grid, Header, Icon, Form, Segment, Button, Message, Image } from "semantic-ui-react";
 
 import userService from "../../utils/userService";
 import tokenService from "../../utils/tokenService";
@@ -42,6 +42,9 @@ export default function LoginPage({handleSignUpOrLogin}) {
     return (
         <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
             <Grid.Column style={{ maxWidth: 450 }}>
+                <h2>Welcome to...</h2>
+                <Image src="https://i.imgur.com/94MZOzLl.png" centered size="large"/> 
+                <h2>For the best experience, please:</h2>  
                 <Header as="h2" color="black" textAlign="center">
                     <Icon color='red' name='users' />Sign In
                 </Header>

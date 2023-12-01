@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, Header, Form, Segment, Button, Icon } from "semantic-ui-react";
+import { Grid, Header, Form, Segment, Button, Icon, Image } from "semantic-ui-react";
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import userService from '../../utils/userService';
 import { useNavigate } from "react-router-dom";
@@ -67,8 +67,8 @@ export default function SignUpPage({handleSignUpOrLogin}) {
     return (
         <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
             <Grid.Column style={{ maxWidth: 450 }}>
+                <Image src="https://i.imgur.com/94MZOzLl.png" centered size="large"/>
                 <Header as="h2" color="black" textAlign="center">
-{/* ==================== Icon is not working -- CHECK LATER ====================== */}
                 <Icon color='red' name='users' />Sign Up
                 </Header>
                 <Form autoComplete="off" onSubmit={handleSubmit}>
@@ -98,7 +98,7 @@ export default function SignUpPage({handleSignUpOrLogin}) {
                             required
                         />
                         <Form.Input
-                            type="passwordConf"
+                            type="password"
                             name="passwordConf"
                             placeholder="Confirm Password"
                             value={state.passwordConf}

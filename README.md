@@ -2,11 +2,11 @@
 
 Bored? No More is an app for those of us who have just run out of things to do and need a place to go to find some new ideas!  You can go through several random activities until you find one that suits your needs, then accept the activity.  Within the app, you can keep track which activities you've completed, as well as, see other user's activities to maybe get some ideas from there.
 
-# Screenshot
+# Screenshots
 
 <img src="https://i.imgur.com/bzQYXWql.png">
 <img src="https://i.imgur.com/0a2s7sFl.png">
-<img src="https://i.imgur.com/zKcyLBll.png">
+<img src="https://i.imgur.com/H6HbIM2l.png">
 
 
 # Technologies Used
@@ -23,7 +23,7 @@ Bored? No More is an app for those of us who have just run out of things to do a
 
 # Let's Check it Out!
 
-### [Bored? No More]()
+### [Bored? No More]()**Coming Soon!!!
 ### [Trello](https://trello.com/b/SkgrdA7H/project-3)
 
 # Future Enhancements

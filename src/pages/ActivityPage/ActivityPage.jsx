@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Segment, Table, Grid, Form, Button } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import RandomActivityCard from "../../components/RandomActivityCard/RandomActivityCard";
 import ActivityFeed from "../../components/ActivityFeed/ActivityFeed";
 import tokenService from "../../utils/tokenService";
