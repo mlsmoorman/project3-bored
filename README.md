@@ -23,7 +23,7 @@ Bored? No More is an app for those of us who have just run out of things to do a
 
 # Let's Check it Out!
 
-### [Bored? No More]()**Coming Soon!!!
+### [Bored? No More](http://ec2-54-242-138-8.compute-1.amazonaws.com:8000/)
 ### [Trello](https://trello.com/b/SkgrdA7H/project-3)
 
 # Future Enhancements
